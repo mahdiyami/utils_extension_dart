@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:intl/intl.dart' as intl;
 
 import 'ext.dart';
@@ -34,6 +35,10 @@ extension StringColorParser on String {
   }
 
   String get showDashIfEmpty => isEmpty ? '-' : this;
+
+  String get firstLetterUpperCase => isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
+
+  String get firstLetterLowerCase => isNotEmpty ? '${this[0].toLowerCase()}${substring(1)}' : '';
 }
 
 extension StringNullExtensions on String? {
@@ -46,8 +51,7 @@ extension StringNullExtensions on String? {
     return false;
   }
 
-  String get showDashIfEmptyOrNull =>
-      (this == null || this!.isEmpty) ? '-' : this!;
+  String get showDashIfEmptyOrNull => (this == null || this!.isEmpty) ? '-' : this!;
 
   /// Returns true if s is neither null,
   /// empty nor is solely made of whitespace characters.
@@ -56,11 +60,9 @@ extension StringNullExtensions on String? {
     if (isEmptyOrNull) return false;
     return !this!.trim().isEmptyOrNull;
   }
-  bool get isURl => RegExp(r"^(?:http|https):\/\/[\w\-_]+(?:\.[\w\-_]+)+[\w\-.,@?^=%&:/~\\+#]*$")
-      .hasMatch((!isEmptyOrNull) ? this! :''  );
+
+  bool get isURl => RegExp(r"^(?:http|https):\/\/[\w\-_]+(?:\.[\w\-_]+)+[\w\-.,@?^=%&:/~\\+#]*$").hasMatch((!isEmptyOrNull) ? this! : '');
 }
-
-
 
 const _htmlColorNames = {
   'aliceblue': '#f0f8ff',
